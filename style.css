@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.vid {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background-color: black;
+  opacity: 0;
+}
+
+.vid.active {
+  animation: muncul 10s 1 forwards;
+}
+
+.none {
+  opacity: 1;
+}
+
+.btn {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  transition: all ease-in-out 0.3s;
+  padding: 10px;
+  border: none;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  animation: shake 1s infinite alternate ease-in;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(49, 49, 49);
+}
+
+.btn-2 {
+  background-color: white;
+  color: black;
+  transition: all ease-in-out 0.3s;
+  padding: 10px;
+  border: none;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  animation: shake 1s infinite alternate ease-in;
+  cursor: pointer;
+}
+
+.btn-2:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Card Pertama */
+
+.card-1 {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card-1.none {
+  animation: hilang 3s 1 forwards;
+}
+
+.card-1 img {
+  margin-right: 5px;
+  width: 100px;
+  height: 100px;
+  animation: mover 2s infinite alternate;
+}
+
+/* Card Kedua */
+
+.fn-large {
+  font-size: large;
+  color: white;
+}
+
+.fn-large-vr1 {
+  font-size: large;
+  color: black;
+}
+
+.card-2 {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.notif {
+  position: absolute;
+  top: 30%;
+  height: 250px;
+  width: 300px;
+  border-radius: 20px;
+  text-align: center;
+  background-color: white;
+  z-index: 1;
+}
+
+.notif-card {
+  z-index: 2;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.notif-card p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.notif-card img {
+  width: 100px;
+  height: 100px;
+}
+
+/* Card Ketiga */
+
+.fn-large-vr2 {
+  font-size: large;
+  color: rgb(255, 255, 255);
+}
+
+.color-white {
+  color: white;
+}
+
+.card-3 {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card-3 img {
+  width: 100px;
+  height: 100px;
+}
+
+.card-3 p {
+  margin-top: 10px;
+}
+
+.btn-pilih {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pilih:hover {
+  background-color: rgb(34, 34, 34);
+}
+
+.div-button button {
+  margin: 10px;
+}
+
+.notif-kedua {
+  position: absolute;
+  top: 30%;
+  height: 250px;
+  width: 300px;
+  border-radius: 20px;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  z-index: 1;
+  cursor: pointer;
+}
+
+/* Responsif */
+
+@media only screen and (max-width: 600px) {
+  .notif {
+    width: auto;
+  }
+
+  .card-3 {
+    width: 100%;
+    height: 100vh;
+  }
+}
+
+/* Animasi */
+
+@keyframes muncul {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hilang {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(2px, 1px) rotate(5deg);
+  }
+  100% {
+    transform: translate(1px, 2px) rotate(-5deg);
+  }
+}
+
+@keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
