@@ -21,6 +21,11 @@ let dataDummy = [
     pesan: "Ikan hiu makan tomat, i love you so much &hearts;",
     img: "./assets/imgs/guby-cute.gif",
   },
+  {
+    id: 4,
+    pesan: "Jalan-jalan ke kota malang, jangan lupa beli sempolan, kamu ini wanita ku sayang, ayo kita menuju pelaminan",
+    img: "./assets/imgs/hasher-sticker-kiss.gif",
+  },
 ];
 
 function randomData(pesan) {
@@ -79,6 +84,10 @@ function createElementCard() {
     const cardKedua = document.createElement("div");
     notif.classList.add("notif");
     cardKedua.classList.add("notif-card");
+    const span = document.createElement("span");
+    span.classList.add("icon-silang");
+    const icon = document.createElement("i");
+    icon.classList.add("fa-solid", "fa-xmark");
 
     const notifTitle = document.createElement("h2");
     notifTitle.classList.add("fn-large-vr1");
@@ -93,17 +102,19 @@ function createElementCard() {
     div.appendChild(notif);
     notif.appendChild(cardKedua);
     cardKedua.appendChild(notifTitle);
+    cardKedua.appendChild(span);
+    span.appendChild(icon);
     cardKedua.appendChild(notifDes);
     cardKedua.appendChild(stikerSatu);
 
-    const removeClassNotif = document.getElementsByClassName("notif")[0];
+    const removeClassNotif = document.getElementsByClassName("icon-silang")[0];
 
     removeClassNotif.addEventListener("click", function () {
-      removeClassNotif.remove();
+      notif.remove();
     });
 
     setTimeout(function () {
-      removeClassNotif.remove();
+      notif.remove();
     }, 6000);
   }
 
@@ -113,6 +124,7 @@ function createElementCard() {
     cardKetiga.classList.add("card-3");
     const stikerDua = document.createElement("img");
     stikerDua.setAttribute("src", "./assets/imgs/bubu-love.gif");
+    stikerDua.classList.add("stiker-head");
     const tampilNama = document.createElement("p");
     tampilNama.innerHTML = "Hallo " + getInputNama + " &#10084";
 
@@ -138,6 +150,11 @@ function createElementCard() {
       const notifTitle = document.createElement("h2");
       notifTitle.classList.add("fn-large-vr2");
       notifTitle.innerHTML = "PESAN!!";
+      const span = document.createElement("span");
+      span.classList.add("icon-silang");
+      const icon = document.createElement("i");
+      icon.style.color = "white";
+      icon.classList.add("fa-solid", "fa-xmark");
 
       const tampilPesan = document.createElement("p");
       tampilPesan.classList.add("color-white");
@@ -146,13 +163,120 @@ function createElementCard() {
       const stikerDua = document.createElement("img");
       stikerDua.setAttribute("src", data.img);
 
+      const shareWa = document.createElement("button");
+      shareWa.classList.add("btn-3");
+      shareWa.innerHTML = "Share Wa";
+
+      shareWa.addEventListener("click", function () {
+        cardKedua.remove();
+
+        const formWa = document.createElement("form");
+        formWa.classList.add("notif-card-wa");
+
+        const notifTitle = document.createElement("h2");
+        notifTitle.classList.add("fn-large-vr2");
+        notifTitle.innerHTML = "WhatsApp";
+
+        const h1 = document.createElement("h1");
+        h1.innerHTML = "Masukin Wa Kamu";
+        h1.classList.add("fn-large", "my-5");
+        const span = document.createElement("span");
+        span.classList.add("icon-silang");
+        const icon = document.createElement("i");
+        icon.style.color = "white";
+        icon.classList.add("fa-solid", "fa-xmark");
+        const inputWa = document.createElement("input");
+        inputWa.setAttribute("id", "noWa");
+        inputWa.setAttribute("type", "tel");
+        inputWa.classList.add("input");
+        inputWa.placeholder = "6281345671234";
+
+        const kirim = document.createElement("button");
+        kirim.setAttribute("type", "submit");
+        kirim.classList.add("btn-3");
+        kirim.innerHTML = "Kirim";
+
+        kirim.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const getInputWa = document.getElementById("noWa").value;
+
+          if (getInputWa.length == 0) {
+            createElementCardKetiga();
+          } else if (getInputWa.length > 13) {
+            createElementCardKetiga();
+          } else {
+            const a = window.open(`https://wa.me/${getInputWa}/?text=${data.pesan}`, "_blank");
+            formWa.remove();
+            return a;
+          }
+
+          function createElementCardKetiga() {
+            const notif = document.createElement("div");
+            const cardKedua = document.createElement("div");
+            notif.classList.add("notif-kedua");
+            cardKedua.classList.add("notif-card");
+
+            const notifTitle = document.createElement("h2");
+            notifTitle.classList.add("fn-large-vr2");
+            notifTitle.innerHTML = "PESAN";
+            const span = document.createElement("span");
+            span.classList.add("icon-silang");
+            const icon = document.createElement("i");
+            icon.style.color = "white";
+            icon.classList.add("fa-solid", "fa-xmark");
+
+            const tampilPesan = document.createElement("p");
+            tampilPesan.classList.add("color-white");
+            tampilPesan.innerHTML = "Nomor ngga boleh kosong yaa, ngga boleh juga lebih dari 13, dan ngga boleh huruf hehe..";
+
+            const stikerDua = document.createElement("img");
+            stikerDua.setAttribute("src", "./assets/imgs/erm-fingers.gif");
+            stikerDua.style.marginBottom = "30px";
+
+            cardKetiga.appendChild(notif);
+            notif.appendChild(cardKedua);
+            cardKedua.appendChild(notifTitle);
+            notifTitle.appendChild(span);
+            span.appendChild(icon);
+            cardKedua.appendChild(tampilPesan);
+            cardKedua.appendChild(stikerDua);
+
+            const removeClassNotif = document.getElementsByClassName("icon-silang")[1];
+
+            removeClassNotif.addEventListener("click", function () {
+              let notif = document.getElementsByClassName("notif-kedua")[1];
+              notif.remove();
+            });
+          }
+        });
+
+        notif.appendChild(formWa);
+        formWa.appendChild(h1);
+        h1.appendChild(span);
+        span.appendChild(icon);
+        formWa.appendChild(inputWa);
+        formWa.appendChild(kirim);
+
+        const removeClassNotif = document.getElementsByClassName("icon-silang")[0];
+
+        removeClassNotif.addEventListener("click", function () {
+          notif.remove();
+        });
+      });
+
       cardKetiga.appendChild(notif);
       notif.appendChild(cardKedua);
       cardKedua.appendChild(notifTitle);
+      notifTitle.appendChild(span);
+      span.appendChild(icon);
       cardKedua.appendChild(tampilPesan);
       cardKedua.appendChild(stikerDua);
+      cardKedua.appendChild(shareWa);
 
-      notif.addEventListener("click", function () {
+      const removeClassNotif = document.getElementsByClassName("icon-silang")[0];
+
+      removeClassNotif.addEventListener("click", function () {
         notif.remove();
       });
     });
@@ -166,21 +290,31 @@ function createElementCard() {
       const notifTitle = document.createElement("h2");
       notifTitle.classList.add("fn-large-vr2");
       notifTitle.innerHTML = "KAMU JAHAT!!";
+      const span = document.createElement("span");
+      span.classList.add("icon-silang");
+      const icon = document.createElement("i");
+      icon.style.color = "white";
+      icon.classList.add("fa-solid", "fa-xmark");
 
       const tampilPesan = document.createElement("p");
       tampilPesan.classList.add("color-white");
-      tampilPesan.innerHTML = "Masa kamau ngga mau liat pesan aku";
+      tampilPesan.innerHTML = "Masa kamu ngga mau liat pesan aku, kamu jahat yaa sekarang!!!";
 
       const stikerDua = document.createElement("img");
       stikerDua.setAttribute("src", "./assets/imgs/quby-sticker.gif");
+      stikerDua.style.marginBottom = "30px";
 
       cardKetiga.appendChild(notif);
       notif.appendChild(cardKedua);
       cardKedua.appendChild(notifTitle);
+      notifTitle.appendChild(span);
+      span.appendChild(icon);
       cardKedua.appendChild(tampilPesan);
       cardKedua.appendChild(stikerDua);
 
-      notif.addEventListener("click", function () {
+      const removeClassNotif = document.getElementsByClassName("icon-silang")[0];
+
+      removeClassNotif.addEventListener("click", function () {
         notif.remove();
       });
     });
